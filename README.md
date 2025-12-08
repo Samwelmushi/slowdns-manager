@@ -1,12 +1,15 @@
-# slowdns-manager
-Professional DNSTT &amp; SSH User Management Script with Full Features
 # 🌐 SLOW DNS - Complete DNSTT & SSH Management System
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Bash](https://img.shields.io/badge/Bash-4.0%2B-green.svg)](https://www.gnu.org/software/bash/)
 [![Platform](https://img.shields.io/badge/Platform-Linux-blue.svg)](https://www.linux.org/)
+[![GitHub stars](https://img.shields.io/github/stars/Samwelmushi/slowdns-manager?style=social)](https://github.com/Samwelmushi/slowdns-manager)
 
 Professional DNS Tunnel (DNSTT) and SSH user management system with an intuitive interface and comprehensive features.
+
+**Made by The King** 👑👑
+
+---
 
 ## ✨ Features
 
@@ -36,6 +39,8 @@ Professional DNS Tunnel (DNSTT) and SSH user management system with an intuitive
 - Professional error handling
 - System information dashboard
 
+---
+
 ## 📋 Requirements
 
 - **OS**: Ubuntu 18.04+ / Debian 9+ / CentOS 7+
@@ -43,152 +48,332 @@ Professional DNS Tunnel (DNSTT) and SSH user management system with an intuitive
 - **Network**: Port 53 must be available
 - **Dependencies**: Auto-installed (wget, curl, ufw/firewalld, git, gcc)
 
-## 🚀 Quick Start
+---
 
-### Installation
+## 🚀 Quick Installation
+
+### ⚡ One-Line Install (Recommended)
 ```bash
-# Download the script
-wget https://raw.githubusercontent.com/YOUR_USERNAME/slowdns-manager/main/slowdns.sh
+wget -qO- https://raw.githubusercontent.com/Samwelmushi/slowdns-manager/main/install.sh | sudo bash
+```
+
+### 📦 Manual Installation
+```bash
+# Download the installer
+wget https://raw.githubusercontent.com/Samwelmushi/slowdns-manager/main/install.sh
 
 # Make it executable
-chmod +x slowdns.sh
+chmod +x install.sh
 
 # Run as root
-sudo ./slowdns.sh
+sudo ./install.sh
 ```
 
-### One-Line Installation
+### 🔧 Alternative Method
 ```bash
-wget -O slowdns.sh https://raw.githubusercontent.com/YOUR_USERNAME/slowdns-manager/main/slowdns.sh && chmod +x slowdns.sh && sudo ./slowdns.sh
+# Download main script
+sudo wget https://raw.githubusercontent.com/Samwelmushi/slowdns-manager/main/slowdns.sh -O /usr/local/bin/slowdns
+
+# Make executable
+sudo chmod +x /usr/local/bin/slowdns
+
+# Run it
+sudo slowdns
 ```
+
+---
 
 ## 📖 Usage Guide
 
+### 🎯 First Time Setup
+
+After installation, run:
+```bash
+sudo slowdns
+```
+
 ### 1️⃣ Setting Up DNSTT
 
-1. Run the script: `sudo ./slowdns.sh`
-2. Select **"1) DNSTT Management"**
-3. Choose **"1) Install/Setup DNSTT"**
-4. Follow the prompts:
-   - Enter your nameserver domain or press Enter for auto-generate
-   - Select MTU value (default: 1200)
-5. Save the connection details provided
+1. From main menu, select **"1) DNSTT Management"**
+2. Choose **"1) Install/Setup DNSTT"**
+3. Follow the prompts:
+   - Enter your nameserver domain or press Enter for auto-generate (tns.voltran.online)
+   - Select MTU value (default: 1200 - recommended)
+4. Save the connection details provided ✅
 
 ### 2️⃣ Managing SSH Users
 
 1. From main menu, select **"2) SSH User Management"**
 2. Choose your action:
-   - **Add User**: Create new SSH accounts
-   - **List Users**: View all users and their status
-   - **Delete User**: Remove SSH accounts
+   - **Add User**: Create new SSH accounts with custom settings
+   - **List Users**: View all users and their status (ACTIVE/EXPIRED)
+   - **Delete User**: Remove SSH accounts safely
    - **Edit Banner**: Customize login message
 
 ### 3️⃣ MTU Options Explained
 
-- **512**: Best for very slow/unstable connections
-- **1200**: Default - Balanced performance (recommended)
-- **1280**: Better performance for good connections
-- **1420**: Maximum performance for excellent connections
-- **Custom**: Specify your own value (256-1500)
+| MTU Value | Best For | Description |
+|-----------|----------|-------------|
+| **512** | Very slow connections | Maximum stability, lowest speed |
+| **1200** | ⭐ Default | Balanced performance (recommended) |
+| **1280** | Good connections | Better performance |
+| **1420** | Excellent connections | Maximum performance |
+| **Custom** | Specific needs | Enter value between 256-1500 |
 
-## 🔧 Configuration### Important Files
-- `/etc/firewall/dnstt/server.key` - Private key
-- `/etc/firewall/dnstt/server.pub` - Public key
-- `/etc/firewall/dnstt/domain.txt` - Nameserver domain
-- `/etc/slowdns/users.txt` - User database
-- `/etc/slowdns/banner` - Login banner
+---
+
+## 🔧 Configuration---
 
 ## 🔐 Security Features
 
-- Automatic firewall configuration
-- Secure key generation
-- User expiration management
-- Connection limit enforcement
-- Process isolation for users
+- ✅ Automatic firewall configuration
+- ✅ Secure key generation
+- ✅ User expiration management
+- ✅ Connection limit enforcement
+- ✅ Process isolation for users
+- ✅ Password encryption
 
-## 📊 System Requirements Check
+---
+
+## 📊 Example Usage
+
+### Create a New User
 ```bash
-# Check if port 53 is available
-sudo netstat -tuln | grep :53
-
-# Check firewall status
-sudo ufw status  # For UFW
-sudo firewall-cmd --state  # For Firewalld
+sudo slowdns
+# Select: 2 (SSH User Management)
+# Select: 1 (Add New User)
+# Username: john
+# Password: secure123
+# Expiration: 30 days
+# Max connections: 2
 ```
+
+### View DNSTT Status
+```bash
+sudo slowdns
+# Select: 1 (DNSTT Management)
+# Select: 2 (View DNSTT Status)
+```
+
+### List All Users
+```bash
+sudo slowdns
+# Select: 2 (SSH User Management)
+# Select: 2 (List All Users)
+```
+
+---
 
 ## 🐛 Troubleshooting
 
-### Port 53 Already in Use
+### Problem: Port 53 Already in Use
+**Solution:**
 ```bash
-# Find process using port 53
+# Find what's using port 53
 sudo netstat -tulpn | grep :53
 
-# Stop the service (example: systemd-resolved)
+# If it's systemd-resolved, stop it
 sudo systemctl stop systemd-resolved
+sudo systemctl disable systemd-resolved
+
+# Run the script again
+sudo slowdns
 ```
 
-### DNSTT Service Not Starting
+### Problem: DNSTT Service Not Starting
+**Solution:**
 ```bash
 # Check service status
 sudo systemctl status dnstt
 
-# View logs
+# View detailed logs
 sudo journalctl -u dnstt -f
+
+# Restart the service
+sudo systemctl restart dnstt
 ```
 
-### User Cannot Connect
-1. Verify user exists: `id username`
-2. Check user expiration: `chage -l username`
-3. Verify SSH service: `sudo systemctl status ssh`
+### Problem: User Cannot Connect
+**Solution:**
+```bash
+# 1. Verify user exists
+id username
 
-## 📸 Screenshots
+# 2. Check user expiration
+sudo chage -l username
 
-### Main Menu## 🤝 Contributing
+# 3. Verify SSH service is running
+sudo systemctl status ssh
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+# 4. Check firewall rules
+sudo ufw status
+```
 
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/AmazingFeature`)
-3. Commit your changes (`git commit -m 'Add some AmazingFeature'`)
-4. Push to the branch (`git push origin feature/AmazingFeature`)
-5. Open a Pull Request
+### Problem: Installation Fails
+**Solution:**
+```bash
+# Make sure you have internet connection
+ping -c 4 google.com
 
-## 📝 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 👑 Author
-
-**Made by The King** 👑👑
-
-## ⭐ Support
-
-If you find this project useful, please consider giving it a star ⭐
-
-## 📞 Support & Contact
-
-- 🐛 Issues: [GitHub Issues](https://github.com/YOUR_USERNAME/slowdns-manager/issues)
-- 💬 Discussions: [GitHub Discussions](https://github.com/YOUR_USERNAME/slowdns-manager/discussions)
-
-## 📚 Additional Resources
-
-- [DNSTT Documentation](https://github.com/username/dnstt)
-- [SSH Best Practices](https://www.ssh.com/academy/ssh/best-practices)
-- [DNS Tunnel Tutorial](https://example.com/dns-tunnel-guide)
-
-## 🔄 Changelog
-
-### Version 3.4.0 (Latest)
-- ✅ Initial release
-- 🌐 Full DNSTT support
-- 👥 Complete SSH user management
-- 🎨 Professional colorful interface
-- 📊 Multiple MTU options
-- 🔑 Automatic key generation
-- 🚪 Multi-firewall support
+# Try manual installation
+wget https://raw.githubusercontent.com/Samwelmushi/slowdns-manager/main/slowdns.sh
+sudo chmod +x slowdns.sh
+sudo ./slowdns.sh
+```
 
 ---
 
-**⚠️ Disclaimer**: This tool is for educational and legitimate network management purposes only. Always comply with your local laws and regulations.
+## 📸 Screenshots
+
+### Main Menu---
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+1. **Fork** the repository
+2. Create your feature branch:
+```bash
+   git checkout -b feature/AmazingFeature
+```
+3. Commit your changes:
+```bash
+   git commit -m 'Add some AmazingFeature'
+```
+4. Push to the branch:
+```bash
+   git push origin feature/AmazingFeature
+```
+5. Open a **Pull Request**
+
+### Ideas for Contributions
+- 🌍 Add multi-language support
+- 📊 Add bandwidth monitoring
+- 🔔 Add notification system
+- 📱 Create mobile app companion
+- 🎨 Improve UI/UX
+- 📝 Improve documentation
+- 🐛 Bug fixes and improvements
+
+---
+
+## 📝 License
+---
+
+## 👑 Author
+
+**Samwelmushi (The King)** 👑👑
+
+- 🐙 GitHub: [@Samwelmushi](https://github.com/Samwelmushi)
+- 📧 Issues: [Report a bug](https://github.com/Samwelmushi/slowdns-manager/issues)
+- 💬 Discussions: [Join the conversation](https://github.com/Samwelmushi/slowdns-manager/discussions)
+
+---
+
+## ⭐ Show Your Support
+
+If you find this project useful, please consider:
+
+- ⭐ Starring this repository
+- 🍴 Forking it
+- 📢 Sharing it with others
+- 🐛 Reporting bugs
+- 💡 Suggesting new features
+
+---
+
+## 📞 Support & Contact
+
+- 🐛 **Bug Reports**: [GitHub Issues](https://github.com/Samwelmushi/slowdns-manager/issues)
+- 💬 **Questions**: [GitHub Discussions](https://github.com/Samwelmushi/slowdns-manager/discussions)
+- 📖 **Documentation**: [Wiki](https://github.com/Samwelmushi/slowdns-manager/wiki)
+
+---
+
+## 📚 Additional Resources
+
+- [DNSTT Official Documentation](https://github.com/username/dnstt)
+- [SSH Security Best Practices](https://www.ssh.com/academy/ssh/best-practices)
+- [DNS Tunnel Tutorial](https://en.wikipedia.org/wiki/DNS_tunneling)
+- [Ubuntu Server Guide](https://ubuntu.com/server/docs)
+
+---
+
+## 🔄 Changelog
+
+### Version 3.4.0 (Current - December 2025)
+- ✅ Initial public release
+- 🌐 Full DNSTT support with auto-configuration
+- 👥 Complete SSH user management system
+- 🎨 Professional colorful ASCII interface
+- 📊 Multiple MTU options (512, 1200, 1280, 1420, custom)
+- 🔑 Automatic cryptographic key generation
+- 🚪 Multi-firewall support (UFW, Firewalld, iptables)
+- 📝 Customizable login banner
+- 📅 User expiration management
+- 🔢 Connection limit control
+- 📊 Real-time status monitoring
+- ⚡ Easy one-line installation
+
+---
+
+## 📋 Roadmap
+
+### Planned Features
+- [ ] Web-based control panel
+- [ ] Automatic backup system
+- [ ] Email notifications
+- [ ] Multi-server support
+- [ ] Bandwidth usage statistics
+- [ ] Docker support
+- [ ] API for external integrations
+- [ ] Mobile app for management
+
+---
+
+## ⚠️ Disclaimer
+
+This tool is for **educational and legitimate network management purposes only**. 
+
+- ✅ Always comply with your local laws and regulations
+- ✅ Use only on networks you own or have permission to manage
+- ✅ Respect user privacy and data protection laws
+- ❌ Do not use for unauthorized access
+- ❌ Do not use to bypass security measures
+
+**The author is not responsible for any misuse of this software.**
+
+---
+
+## 🙏 Acknowledgments
+
+Special thanks to:
+- The open-source community
+- All contributors and testers
+- Everyone who provides feedback and suggestions
+
+---
+
+## 💰 Donation
+
+If you want to support this project:
+
+- ⭐ Star the repository
+- 🍴 Fork and contribute
+- 📢 Share with others
+- ☕ [Buy me a coffee](https://www.buymeacoffee.com/samwelmushi) (optional)
+
+---
+
+<div align="center">
+
+**Made with ❤️ by The King 👑👑**
+
+⭐ Star this repo if you find it useful!
+
+[Report Bug](https://github.com/Samwelmushi/slowdns-manager/issues) · [Request Feature](https://github.com/Samwelmushi/slowdns-manager/issues) · [Documentation](https://github.com/Samwelmushi/slowdns-manager/wiki)
+
+</div>
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
 
 ### Configuration Files Location
