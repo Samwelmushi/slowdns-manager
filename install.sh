@@ -42,3 +42,7 @@ echo ""
 echo -e "${GREEN}Run it anytime using:${NC}"
 echo -e "${YELLOW}   slowdns${NC}"
 echo ""
+slowdns-manager/
+   ├── install.sh     ← ADD THIS
+   └── slowdns.sh     ← Already uploaded
+   
