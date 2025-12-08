@@ -1,0 +1,17 @@
+# System files
+*.log
+*.tmp
+.DS_Store
+Thumbs.db
+
+# Configuration files with sensitive data
+server.key
+*.key
+*.pub
+
+# Backup files
+*.bak
+*~
+
+# User database
+users.txt
