@@ -10,6 +10,37 @@ Professional DNS Tunnel (DNSTT) and SSH user management system with an intuitive
 **Made by The King** 👑👑
 
 ---
+# DNS Tunneling Script  
+**Supports: Debian 12+ and Ubuntu 20+**
+
+This script provides an automated setup for DNS tunneling on modern Linux systems.  
+It includes optimized configurations, automatic dependency installation, and support for fast tunneling protocols.
+
+---
+
+## 📸 Preview / Screenshot
+> Replace the link below with your own image  
+![DNS Script](https://your-image-link-here.png)
+
+---
+
+## ✅ Features
+- Fully compatible with **Debian 12+**  
+- Fully compatible with **Ubuntu 20+**  
+- Auto-installation of all dependencies  
+- Optimized DNS tunneling configuration  
+- Simple, beginner-friendly setup  
+- Works perfectly on cloud servers (AWS, Vultr, DigitalOcean, Contabo, etc.)
+
+---
+
+## 🚀 Installation
+
+Run this command on a fresh server:
+
+```bash
+wget -qO- https://raw.githubusercontent.com/yourusername/yourrepo/main/install.sh | bash
+
 
 ## ✨ Features
 
