@@ -59,7 +59,7 @@ check_for_updates() {
     echo ""
     
     # Try to check for updates if URL is configured
-    if [[ "$UPDATE_URL" != "https://raw.githubusercontent.com/YourRepo/slowdns/main/slowdns.sh" ]]; then
+    if [[ "$UPDATE_URL" != "https://raw.githubusercontent.com/samwelmushi/slowdns/main/slowdns.sh" ]]; then
         loading_bar 2 "${CYAN}Connecting to update server${NC}"
         
         REMOTE_VERSION=$(curl -s "$UPDATE_URL" | grep '^SCRIPT_VERSION=' | cut -d'"' -f2)
